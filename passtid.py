@@ -1,9 +1,7 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from time import sleep
 import argparse
-
-DESIRED_LOCATIONS = ['Sthlm City', 'Solna', 'Globen', 'Norrtälje']
-DESIRED_MONTHS = ['mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep']
 
 class PassBot():
     def __init__(self):
@@ -33,9 +31,9 @@ class PassBot():
         next_step_btn = self.driver.find_element_by_xpath('//*[@id="Main"]/form/div[2]/input')
         next_step_btn.click()
 
-    def search(self, locations, months, user_data):
+    def search(self, locations, months, user_data, wait_duration):
         while True:
-            # sleep(0.05)
+            sleep(wait_duration)
             print('Starting search...')
             try:
                 warning = self.driver.find_element_by_xpath('//*[@id="Main"]/div[2]/ul/li')
@@ -48,7 +46,6 @@ class PassBot():
                     return True
 
     def _find_slot(self, desired_locations, desired_months, user_data):
-        print('Starting search...')
         try:
             warning = self.driver.find_element_by_xpath('//*[@id="Main"]/div[2]/ul/li')
             print(warning.text)
@@ -122,17 +119,16 @@ def acceptable_date(date, desired_months):
     else:
         return False
 
-def run(url, locations, months, user_data):
+def run(url, locations, months, user_data, wait_duration):
     bot = PassBot()
     while True:
         try:
             bot.clear_cookies()
             bot.init(url)
-            success = bot.search(locations, months, user_data)
+            success = bot.search(locations, months, user_data, wait_duration)
             if success:
                 print('Timeslot booked succesfully!')
                 return
-            # sleep(0.05)
         except Exception as e:
             print('An exception occured in main loop:', e)
 
@@ -157,6 +153,9 @@ def main():
     parser.add_argument('--phone', type=str,
         help='Your phone number, for example: --phone=1234',
         required=True)
+    parser.add_argument('--wait_duration', type=int,
+                        help='The duration (in seconds) to wait between searches (default 0)',
+                        default=0)
     args = parser.parse_args()
     locations = args.locations.split(',')
     months = args.months.split(',')
@@ -166,7 +165,7 @@ def main():
         "phone" : args.phone,
         "email" : args.email
     }
-    run(args.url, locations, months, user_data)
+    run(args.url, locations, months, user_data, args.wait_duration)
 
 if __name__ == '__main__':
     main()
