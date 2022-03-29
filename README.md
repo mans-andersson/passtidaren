@@ -26,7 +26,7 @@ These are the required flags:
 
 - `--name=` Specify your full name within quotation marks.
 
-- `--locations=` Comma separated list of locations where you are interested in a time slot. Has to be within your chosen district, which is decided by the URL.
+- `--locations=` Comma separated list of locations where you are interested in a time slot. Has to be within your chosen district (your district depends on chosen url).
 
 - `--months=` Comma separated list of the months where you are interested in getting a time slot (three letter version).
 
