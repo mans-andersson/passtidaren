@@ -14,7 +14,7 @@ Make sure chromedriver binary is available in PATH, for example by moving it to 
 Make sure Python package selenium is installed by running `pip install selenium`.
 
 ## Usage
-Example usage: `python3 passtid.py --url=https://bokapass.nemoq.se/Booking/Booking/Index/stockholm --email=namn@example.com --phone=0701234567 --name="Kalle Anka" --locations="Sthlm City,Globen,Solna" --months=mar,apr,maj`
+Example usage: `python3 passtidaren.py --url=https://bokapass.nemoq.se/Booking/Booking/Index/stockholm --email=namn@example.com --phone=0701234567 --name="Kalle Anka" --locations="Sthlm City,Globen,Solna" --months=mar,apr,maj`
 
 These are the required flags:
 
@@ -30,4 +30,4 @@ These are the required flags:
 
 - `--months=` Comma separated list of the months where you are interested in getting a time slot (three letter version).
 
-Get more info by runninng `python3 passtid.py --help`.
+Get more info by runninng `python3 passtidaren.py --help`.
