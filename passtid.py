@@ -7,7 +7,9 @@ DESIRED_MONTHS = ['mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep']
 
 class PassBot():
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        self.driver = webdriver.Chrome(options=chrome_options)
 
     def clear_cookies(self):
         self.driver.delete_all_cookies()
